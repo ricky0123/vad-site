@@ -13,6 +13,14 @@ title: VAD
       href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
       rel="stylesheet"
     />
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body class="bg-black text-slate-300 no-scrollbar">
     <div class="md:w-[768px] md:mx-auto">
@@ -30,8 +38,4 @@ title: VAD
     </div>
     {{ content | safe }}
   </body>
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </html>
