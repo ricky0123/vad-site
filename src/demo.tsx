@@ -25,7 +25,7 @@ function StartDemoButton({ startDemo }: { startDemo: () => void }) {
     <div className="flex justify-center">
       <button
         onClick={startDemo}
-        className="text-xl text-black font-bold px-3 py-2 rounded bg-gradient-to-r from-pink-600 to-rose-600 hover:from-slate-800 hover:to-neutral-800 hover:text-white"
+        className="text-xl text-black bg-lime-400 font-bold px-3 py-2 rounded hover:bg-black hover:text-white"
       >
         Start demo
       </button>
@@ -63,7 +63,7 @@ function ActiveDemo() {
         </div>
         <div className="w-24 flex justify-start items-center">
           <div
-            className="underline underline-offset-2 text-rose-600 grow"
+            className="underline underline-offset-2 text-black grow"
             onClick={vad.toggle}
           >
             {vad.listening && "Pause"}
@@ -92,7 +92,7 @@ const audioItemKey = (audioURL: string) => audioURL.substring(-10)
 function Loading() {
   return (
     <div className="flex justify-center">
-      <div className="animate-pulse text-2xl text-rose-600">Loading</div>
+      <div className="animate-pulse text-2xl text-black">Loading</div>
     </div>
   )
 }
@@ -100,7 +100,7 @@ function Loading() {
 function Errored() {
   return (
     <div className="flex justify-center">
-      <div className="text-2xl text-rose-600">Something went wrong</div>
+      <div className="text-2xl text-black">Something went wrong</div>
     </div>
   )
 }
