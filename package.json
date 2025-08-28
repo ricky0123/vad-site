@@ -22,9 +22,10 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
-    "@ricky0123/vad-react": "^0.0.31",
-    "framer-motion": "^10.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@ricky0123/vad-react": "^0.0.32",
+    "framer-motion": "^12.23.12",
+    "i": "^0.3.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   }
 }
