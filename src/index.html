@@ -109,62 +109,63 @@
         <div id="turnstile-widget"></div>
       </dialog>
     </div>
-  </body>
-  <script>
-    window.submitEmail = async (event) => {
-      event.preventDefault();
-      try {
-        const submitEmailDialog = document.getElementById("submitEmailDialog");
-        const status = document.getElementById("submitEmailDialogStatus");
+    <script>
+      window.submitEmail = async (event) => {
+        event.preventDefault();
+        try {
+          const submitEmailDialog =
+            document.getElementById("submitEmailDialog");
+          const status = document.getElementById("submitEmailDialogStatus");
 
-        status.textContent = "";
-        submitEmailDialog.showModal();
-        const { token, widgetId } = await getTurnstileToken();
+          status.textContent = "";
+          submitEmailDialog.showModal();
+          const { token, widgetId } = await getTurnstileToken();
 
-        const source = window.location.hostname;
-        const name = "";
-        const email = event.target.elements.email.value;
+          const source = window.location.hostname;
+          const name = "";
+          const email = event.target.elements.email.value;
 
-        const response = await fetch(
-          "https://api.ricky0123.com/api/new-sign-up",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, token, source, name }),
+          const response = await fetch(
+            "https://api.ricky0123.com/api/new-sign-up",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, token, source, name }),
+            }
+          );
+          const result = await response.json();
+
+          if (result.success) {
+            status.textContent = "Thanks! You're subscribed.";
+          } else {
+            status.textContent = "Something went wrong. Try again?";
           }
-        );
-        const result = await response.json();
-
-        if (result.success) {
-          status.textContent = "Thanks! You're subscribed.";
-        } else {
-          status.textContent = "Something went wrong. Try again?";
+          // event.target.reset();
+          // turnstile.reset();
+          turnstile.remove(widgetId);
+        } catch (e) {
+          console.log(e);
+          status.textContent = "Sorry, there was an error.";
         }
-        // event.target.reset();
-        // turnstile.reset();
-        turnstile.remove(widgetId);
-      } catch (e) {
-        console.log(e);
-        status.textContent = "Sorry, there was an error.";
-      }
-    };
+      };
 
-    const getTurnstileToken = () => {
-      return new Promise((res, rej) => {
-        const widgetId = turnstile.render("#turnstile-widget", {
-          sitekey: actualSiteKey, // alwaysPassSiteKey,
-          size: window.innerWidth <= 768 ? "compact" : "normal",
-          callback: function (token) {
-            res({ token, widgetId });
-          },
-          "error-callback": function (errorCode) {
-            rej({ errorCode, widgetId });
-          },
+      const getTurnstileToken = () => {
+        return new Promise((res, rej) => {
+          const widgetId = turnstile.render("#turnstile-widget", {
+            sitekey: actualSiteKey, // alwaysPassSiteKey,
+            size: window.innerWidth <= 768 ? "compact" : "normal",
+            callback: function (token) {
+              res({ token, widgetId });
+            },
+            "error-callback": function (errorCode) {
+              rej({ errorCode, widgetId });
+            },
+          });
         });
-      });
-    };
+      };
 
-    const alwaysPassSiteKey = "1x00000000000000000000AA";
-    const actualSiteKey = "0x4AAAAAACGTVUPmIFsJov8d";
-  </script>
+      const alwaysPassSiteKey = "1x00000000000000000000AA";
+      const actualSiteKey = "0x4AAAAAACGTVUPmIFsJov8d";
+    </script>
+  </body>
 </html>
